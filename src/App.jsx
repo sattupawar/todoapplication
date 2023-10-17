@@ -8,9 +8,11 @@ function App() {
   let [task, setTask] = useState([]);
   let [active, setActive] = useState(true);
   let [activeIndex, setActiveIndex] = useState(-1);
+
   const addTask = (e) => {
+    e.preventDefault();
+
     if (input.length > 0) {
-      e.preventDefault();
       setTask((prev) => [...prev, { id: Date.now(), text: input }]);
       setInput("");
     }
