@@ -6,12 +6,14 @@ import "./App.css";
 function App() {
   let [input, setInput] = useState("");
   let [task, setTask] = useState([]);
-   let [active, setActive] = useState(true);
-   let[activeIndex,setActiveIndex]=useState(-1)
+  let [active, setActive] = useState(true);
+  let [activeIndex, setActiveIndex] = useState(-1);
   const addTask = (e) => {
-    e.preventDefault();
-    setTask((prev) => [...prev, { id: Date.now(), text: input }]);
-    setInput("");
+    if (input.length > 0) {
+      e.preventDefault();
+      setTask((prev) => [...prev, { id: Date.now(), text: input }]);
+      setInput("");
+    }
   };
 
   const deleteTask = (index) => {
@@ -20,8 +22,6 @@ function App() {
   };
 
   const editTask = (index, text) => {
-
-    
     let temp = [...task];
     temp[index].text = text;
     setTask(temp);
@@ -54,10 +54,10 @@ function App() {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                     setActiveIndex(index=== activeIndex ? -1 : index);
+                    setActiveIndex(index === activeIndex ? -1 : index);
                   }}
                 >
-                 {activeIndex === index ? "Save": "Edit"} 
+                  {activeIndex === index ? "Save" : "Edit"}
                 </button>
                 <button onClick={() => deleteTask(index)}>Delete</button>
               </div>
